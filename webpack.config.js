@@ -1,19 +1,11 @@
 const base = require('./webpack.config.base');
+const dev = require('./webpack.config.dev');
+const prod = require('./webpack.config.prod');
+const merge = require('webpack-merge');
 
-module.exports = {
-  ...base,
-  mode: 'development',
-  devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './dist',
-  },
-  module: {
-    rules: [
-      ...base.module.rules,
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
-  },
+module.exports = (mode) => {
+  if (mode === 'production') {
+    return merge(base, prod, { mode });
+  }
+  return merge(base, dev, { mode });
 };
