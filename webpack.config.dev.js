@@ -1,6 +1,4 @@
-const base = require('./webpack.config.base');
-const dev = (module.exports = {
-  ...base,
+module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
@@ -8,11 +6,10 @@ const dev = (module.exports = {
   },
   module: {
     rules: [
-      ...base.module.rules,
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
     ],
   },
-});
+};
